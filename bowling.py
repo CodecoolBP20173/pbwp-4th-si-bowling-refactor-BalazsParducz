@@ -31,11 +31,11 @@ def score(game):
     return result
 
 def get_value(char):
-    numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    open_points = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
     bonus = ['X', 'x', '/']
-    for nr in numbers:
-        if char == nr:            
-            return int(char)
+    for point in open_points:
+        if char == point:            
+            return int(point)
         
     for bs in bonus:    
         if char == bs:
