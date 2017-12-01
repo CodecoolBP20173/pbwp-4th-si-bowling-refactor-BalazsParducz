@@ -5,7 +5,7 @@ def score(game):
     for i in range(len(game)):  # amíg a game lista tart
 
         if game[i] == '/':      # ha a listaelem '/', akkor a result = 10 - last értéke
-            result += 10 - last
+            result += 10 - get_value(game[i-1])  
  
         else:
             result += get_value(game[i])       #  ha a listaelem egyéb, akkor a result értéke a get_value visszatérési értéke
@@ -21,8 +21,6 @@ def score(game):
                 else:                                   # egyéb esetben
                     result += get_value(game[i+2])      # a result értéke a get_value visszatérési értéke a következő utáni listaelemnél
         
-        last = get_value(game[i])   # a last értéke a get_value visszatérési értéke az adott listaelemnek megfelelően
-        
         if not in_first_half:                           # ha nem az első próbálkozás
             frame += 1                                  # akkor ugorjunk a következő frame-re
         if in_first_half:                               # ha az első gurításnál tartunk
@@ -30,12 +28,15 @@ def score(game):
         else:                                           # ha a második gurításnál tartunk, akkor...
             in_first_half = True                        # állítsuk vissza az elsőre
         
-        if game[i] == 'X' or game[i] == 'x':            # ha a listaelem 'X' vagy 'x', akkor... 
+        if is_x(game, i):            # ha a listaelem 'X' vagy 'x', akkor... 
             in_first_half = True                        # ... állítsuk a következő elsőgurítás következik...
             frame += 1                                  # ... a  következő frame-ben
     
     # The game score is the total of all frame scores.
     return result
+
+def is_x(game, i):
+    return game[i] == 'X' or game[i] == 'x'
 
 def get_value(char):
     open_points = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
